@@ -32,14 +32,9 @@ class GameFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         binding.gameViewModel = viewModel
+        binding.lifecycleOwner = this
         Log.i("GameFragment", "ViewModelProvider called")
 
-        viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
-            updateScoreText(newScore.toString())
-        })
-        viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->
-            updateWordText(newWord)
-        })
 
         viewModel.currentTime.observe(viewLifecycleOwner, Observer { time ->
             updateTimerText(time)
