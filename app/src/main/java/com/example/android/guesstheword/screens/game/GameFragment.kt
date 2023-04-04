@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.example.android.guesstheword.R
@@ -15,7 +14,7 @@ import com.example.android.guesstheword.databinding.GameFragmentBinding
 
 class GameFragment : Fragment() {
 
-    private lateinit var viewModel: ViewModel
+    private lateinit var viewModel: GameViewModel
     private lateinit var binding: GameFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -32,12 +31,12 @@ class GameFragment : Fragment() {
         Log.i("GameFragment", "ViewModelProvider called")
 
         binding.correctButton.setOnClickListener {
-            (viewModel as GameViewModel).onCorrect()
+            viewModel.onCorrect()
             updateScoreText()
             updateWordText()
         }
         binding.skipButton.setOnClickListener {
-            (viewModel as GameViewModel).onSkip()
+            viewModel.onSkip()
             updateScoreText()
             updateWordText()
         }
