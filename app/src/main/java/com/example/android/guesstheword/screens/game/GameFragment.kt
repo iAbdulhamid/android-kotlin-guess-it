@@ -44,7 +44,6 @@ class GameFragment : Fragment() {
         viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->
             updateWordText(newWord)
         })
-
         return binding.root
     }
 
