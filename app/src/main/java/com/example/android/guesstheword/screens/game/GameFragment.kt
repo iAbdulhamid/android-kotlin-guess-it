@@ -36,10 +36,6 @@ class GameFragment : Fragment() {
         Log.i("GameFragment", "ViewModelProvider called")
 
 
-        viewModel.currentTime.observe(viewLifecycleOwner, Observer { time ->
-            updateTimerText(time)
-        })
-
         viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer { isGameFinished ->
             if(isGameFinished) {
                 gameFinished()
@@ -63,10 +59,6 @@ class GameFragment : Fragment() {
 
     private fun updateScoreText(score: String) {
         binding.scoreText.text = score
-    }
-
-    private fun updateTimerText(newTime: Long) {
-        binding.timerText.text = DateUtils.formatElapsedTime(newTime)
     }
 
 }
