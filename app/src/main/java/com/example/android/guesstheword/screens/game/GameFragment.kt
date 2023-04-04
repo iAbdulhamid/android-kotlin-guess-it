@@ -1,6 +1,7 @@
 package com.example.android.guesstheword.screens.game
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -45,6 +46,11 @@ class GameFragment : Fragment() {
         viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->
             updateWordText(newWord)
         })
+
+        viewModel.currentTime.observe(viewLifecycleOwner, Observer { time ->
+            updateTimerText(time)
+        })
+
         viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer { isGameFinished ->
             if(isGameFinished) {
                 gameFinished()
@@ -69,4 +75,9 @@ class GameFragment : Fragment() {
     private fun updateScoreText(score: String) {
         binding.scoreText.text = score
     }
+
+    private fun updateTimerText(newTime: Long) {
+        binding.timerText.text = DateUtils.formatElapsedTime(newTime)
+    }
+
 }
