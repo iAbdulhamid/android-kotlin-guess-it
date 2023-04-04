@@ -1,16 +1,20 @@
 package com.example.android.guesstheword.screens.game
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class GameViewModel : ViewModel() {
-    var word = ""
-    var score = 0
+    var word = MutableLiveData<String>()
+    var score = MutableLiveData<Int>()
     private lateinit var wordList: MutableList<String>
 
     init {
         resetList()
         nextWord()
+        word.value = wordList.random()
+        score.value = 0
         Log.i("GameViewModle", "GameViewModle Creadted")
 
     }
@@ -55,7 +59,7 @@ class GameViewModel : ViewModel() {
         if (wordList.isEmpty()) {
             //gameFinished()
         } else {
-            word = wordList.removeAt(0)
+            word.value = wordList.removeAt(0)
         }
         //updateWordText()
         //updateScoreText()
@@ -63,12 +67,12 @@ class GameViewModel : ViewModel() {
 
     /** Methods for buttons presses **/
     fun onSkip() {
-        score--
+        score.value = (score.value)?.minus(1)
         nextWord()
     }
 
     fun onCorrect() {
-        score++
+        score.value = (score.value)?.plus(1)
         nextWord()
     }
 }
